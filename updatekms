@@ -1,0 +1,10 @@
+use droom;
+
+db.getCollection('new_suggestion_collection').find({kms_driven:{$gt:1000000}}).forEach(function(doc) {
+    db.new_suggestion_collection.update(
+       { _id: doc._id },
+       { $set: 
+           { kms_driven: 1000000 } 
+       }
+    );
+})
