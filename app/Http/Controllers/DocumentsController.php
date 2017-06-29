@@ -59,7 +59,7 @@ class DocumentsController extends Controller
 						$temp["query"]["bool"]["should"][1]["match"]["_all"]["query"]=$str;
      	$params = [
 				    'index' => 'test_index',
-				    'size'=> 10,
+				    'size'=> 5,
 				    'body' => $temp
 				];
 		$results = $client->search($params);

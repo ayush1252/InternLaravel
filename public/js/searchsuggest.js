@@ -18,9 +18,24 @@ xmlhttp.onreadystatechange = function() {
                if(data.length==0)
                searchlist.innerHTML="";
                for(var i=0; i<data.length; i++)
-	  	 		 {
+	  	 		   {
 	  	 			oneresult=data[i];
-	  	 			var temp='<li><a href="http://droom.in/product/'+oneresult.listing_alias+'" target="_blank">'+oneresult.product_title+"</a></li>";
+	  	 			var temp='<li><a href="http://droom.in/product/'+oneresult.listing_alias+'" target="_blank">';
+            temp=temp+' <div class="ProfileCard u-cf">';
+            temp=temp+ '<img class="ProfileCard-avatar" src="http://cdn1.droom.in';
+            temp=temp+oneresult.photos;
+            temp=temp+'">';
+            temp=temp+'<div class="ProfileCard-details">';
+            temp=temp+'<div class="ProfileCard-realName">';
+            temp=temp+oneresult.product_title;
+            temp=temp+'</div></div>';
+            temp=temp+'<div class="ProfileCard-stats"><div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Fuel Type:</span>';
+            temp=temp+oneresult.fuel_type;
+            temp=temp+'</div>';
+            temp=temp+'</div>';
+            temp=temp+'<div class="ProfileCard-stats"><div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Location:</span>'+oneresult.location+'</div>';
+            temp=temp+'<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">KMS Driven:</span>'+oneresult.kms_driven+'</div></div></div>';
+            temp=temp+"</a></li>";
 	  	 			 if(i==0)
               searchlist.innerHTML="";
              searchlist.innerHTML+=temp;
@@ -34,11 +49,11 @@ $("input").keyup( function(e){
     switch(e.keyCode) { 
          // User pressed "up" arrow
          case 38:
-            navigate('up');
+            //navigate('up');
          break;
          // User pressed "down" arrow
          case 40:
-            navigate('down');
+            //navigate('down');
          break;
          case 13:
             if(currentUrl != '') {
@@ -61,22 +76,22 @@ $("input").keyup( function(e){
 });
 
 //To cordinate mouse with keyboard -- Not working right now
-for(var i = 0; i < $("#menu ul li a").size(); i++) {
-   $("#menu ul li a").eq(i).data("number", i);
-}
-$("#menu ul li a ").hover(
-   function () {
-      console.log("lalala");
-      currentSelection = $(this.li).data("number");
-      console.log(currentSelection);
-      setSelected(currentSelection);
-   },
-    function() {
-      console.log("bye");
-      $("#menu ul li").removeClass("itemhover");
-      currentUrl = '';
-   }
-);
+// for(var i = 0; i < $("#menu ul li a").size(); i++) {
+//    $("#menu ul li a").eq(i).data("number", i);
+// }
+// $("#menu ul li a ").hover(
+//    function () {
+//       console.log("lalala");
+//       currentSelection = $(this.li).data("number");
+//       console.log(currentSelection);
+//       setSelected(currentSelection);
+//    },
+//     function() {
+//       console.log("bye");
+//       $("#menu ul li").removeClass("itemhover");
+//       currentUrl = '';
+//    }
+// );
 
 //Keyboard Navigation and Mouse Navigation
 function setSelected(menuitem) {
