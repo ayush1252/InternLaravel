@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" media="all" href="css/searchbox.css">
   <link rel="stylesheet" type="text/css" media="all" href="css/resultcard.css">
   <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="js/underscore-min.js"></script>
   <script type="text/javascript" src="js/searchsuggest.js"></script>
     <script src="js/handlebars.js"></script>
     <script src="js/main.js"></script>

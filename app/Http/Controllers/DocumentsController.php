@@ -22,7 +22,7 @@ class DocumentsController extends Controller
 						            "_all": {
 						              "query": "",
 						              "operator": "and",
-						              "fuzziness": "auto"
+						              "fuzziness": 5
 						              
 						            }
 						          }

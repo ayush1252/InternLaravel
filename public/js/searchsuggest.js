@@ -12,36 +12,49 @@ $("ul").mousedown(function(ev) {
 });
 xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-
                data=JSON.parse(this.responseText);
                console.log(data);
                if(data.length==0)
                searchlist.innerHTML="";
-               for(var i=0; i<data.length; i++)
-	  	 		   {
-	  	 			oneresult=data[i];
-	  	 			var temp='<li><a href="http://droom.in/product/'+oneresult.listing_alias+'" target="_blank">';
-            temp=temp+' <div class="ProfileCard u-cf">';
-            temp=temp+ '<img class="ProfileCard-avatar" src="http://cdn1.droom.in';
-            temp=temp+oneresult.photos;
-            temp=temp+'">';
-            temp=temp+'<div class="ProfileCard-details">';
-            temp=temp+'<div class="ProfileCard-realName">';
-            temp=temp+oneresult.product_title;
-            temp=temp+'</div></div>';
-            temp=temp+'<div class="ProfileCard-stats"><div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Fuel Type:</span>';
-            temp=temp+oneresult.fuel_type;
-            temp=temp+'</div>';
-            temp=temp+'</div>';
-            temp=temp+'<div class="ProfileCard-stats"><div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Location:</span>'+oneresult.location+'</div>';
-            temp=temp+'<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">KMS Driven:</span>'+oneresult.kms_driven+'</div></div></div>';
-            temp=temp+"</a></li>";
-	  	 			 if(i==0)
-              searchlist.innerHTML="";
-             searchlist.innerHTML+=temp;
-	  	 			console.log(temp);	  	 			
-	  	 		}
+               var groupedData = _.groupBy(data, function(d){return d.category_name});
+               console.log(groupedData);
+               var count=0;
+               for (var key in groupedData) {               
+                var newkey=key;
+                newkey=newkey.toUpperCase();
+                newkey = newkey.replace(/[_]/g,' ');
+                newkey = newkey.replace(/[.]/g,'/');
+                if(count==0)
+                    searchlist.innerHTML="";
+                var temp='<li><h3><strong>'+newkey+'</strong></h3></li>';
+                searchlist.innerHTML+=temp;
+                var data =groupedData[key];
+                for(var i=0; i<data.length; i++)
+                   {
+                  oneresult=data[i];
+                  var temp='<li><a href="http://droom.in/product/'+oneresult.listing_alias+'" target="_blank">';
+                  temp=temp+' <div class="ProfileCard u-cf">';
+                  temp=temp+ '<img class="ProfileCard-avatar" src="http://cdn1.droom.in';
+                  temp=temp+oneresult.photos;
+                  temp=temp+'">';
+                  temp=temp+'<div class="ProfileCard-details">';
+                  temp=temp+'<div class="ProfileCard-realName">';
+                  temp=temp+oneresult.product_title;
+                  temp=temp+'</div></div>';
+                  temp=temp+'<div class="ProfileCard-stats"><div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Fuel Type:</span>';
+                  temp=temp+oneresult.fuel_type;
+                  temp=temp+'</div>';
+                  temp=temp+'</div>';
+                  temp=temp+'<div class="ProfileCard-stats"><div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Location:</span>'+oneresult.location+'</div>';
+                  temp=temp+'<div class="ProfileCard-stat"><span class="ProfileCard-stat-label">KMS Driven:</span>'+oneresult.kms_driven+'</div></div></div>';
+                  temp=temp+"</a></li>";
+                   searchlist.innerHTML+=temp;
+                  console.log(temp);            
+                }
+                count++;
             }
+               }
+               
         };
 
 //Calling of the function

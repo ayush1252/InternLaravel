@@ -102,7 +102,7 @@ class makemapping extends Command
                                            "include_in_all": false
                                          },
                                          "kms_driven":{
-                                           "type": "integer"
+                                           "type": "keyword"
                                          },
                                          "category_name":{
                                            "type": "keyword"
@@ -114,7 +114,7 @@ class makemapping extends Command
                                             "type": "text"
                                          },
                                          "year":{
-                                           "type": "integer"
+                                           "type": "keyword"
                                          },
                                          "trim":{
                                            "type": "text",
